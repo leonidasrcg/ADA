@@ -5,14 +5,14 @@ Este script de Python está diseñado para construir un grafo a partir de datos 
 
 ## Importación de Bibliotecas
 
-\`\`\`python
+```python
 import igraph as ig
 import time
 import logging
 import polars as pl
 import pickle
 import numpy as np
-\`\`\`
+```
 
 * `import igraph as ig`: Importa la biblioteca `igraph`, que se utiliza para crear, manipular y analizar grafos. Se importa con el alias `ig` para facilitar su uso.
 * `import time`: Importa el módulo `time` para medir el tiempo de ejecución de diferentes partes del código, lo cual es útil para evaluar el rendimiento.
@@ -23,9 +23,9 @@ import numpy as np
 
 ## Configuración del Logging
 
-\`\`\`python
+```python
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-\`\`\`
+```
 
 * Configura el sistema de registro (logging).
     * `level=logging.INFO`: Establece el nivel mínimo de los mensajes que se van a registrar en `INFO`. Esto significa que se registrarán los mensajes de tipo `INFO`, `WARNING`, `ERROR` y `CRITICAL`.
@@ -36,7 +36,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 ## Función `crear_grafo_igraph(ubicaciones_path, usuarios_path, block_size=4_000_000)`
 
-\`\`\`python
+```python
 def crear_grafo_igraph(ubicaciones_path, usuarios_path, block_size=4_000_000):
     start_time = time.time()
     logging.info("Cargando ubicaciones...")
@@ -81,7 +81,7 @@ def crear_grafo_igraph(ubicaciones_path, usuarios_path, block_size=4_000_000):
     g.vs["location"] = ubicaciones
 
     return g
-\`\`\`
+```
 
 * Esta función crea un grafo dirigido a partir de archivos de ubicaciones y usuarios.
     * `ubicaciones_path`: Ruta al archivo que contiene las ubicaciones de los nodos.
@@ -134,7 +134,7 @@ def crear_grafo_igraph(ubicaciones_path, usuarios_path, block_size=4_000_000):
 
 ## Función `generar_tabla_grafos_ordenados(grafo, num_nodos=50)`
 
-\`\`\`python
+```python
 def generar_tabla_grafos_ordenados(grafo, num_nodos=50):
     """
     Genera una tabla con información de los primeros y últimos nodos del grafo.
@@ -163,7 +163,7 @@ def generar_tabla_grafos_ordenados(grafo, num_nodos=50):
         })
     tabla = pl.DataFrame(data)
     return tabla
-\`\`\`
+```
 
 * Genera una tabla con información sobre los primeros y últimos nodos del grafo. Esto es útil para obtener una vista rápida de la estructura del grafo.
 * `grafo`: El objeto grafo de `igraph`.
@@ -192,7 +192,7 @@ def generar_tabla_grafos_ordenados(grafo, num_nodos=50):
 
 ## Función `realizar_eda(grafo)`
 
-\`\`\`python
+```python
 def realizar_eda(grafo):
     try:
         num_nodos = grafo.vcount()
@@ -209,7 +209,7 @@ def realizar_eda(grafo):
         logging.info(f"Grado promedio: {promedio_grado:.2f}")
     except Exception as e:
         logging.error(f"Error durante el EDA: {e}")
-\`\`\`
+```
 
 * Realiza un Análisis Exploratorio de Datos (EDA) básico en el grafo.
 * `grafo`: El objeto grafo de `igraph`.
@@ -226,7 +226,7 @@ def realizar_eda(grafo):
 
 ## Bloque Principal (`if __name__ == "__main__":`)
 
-\`\`\`python
+```python
 if __name__ == "__main__":
     # Define las rutas de los archivos de entrada y salida
     ubicaciones_archivo = '10_million_location.txt'
@@ -242,7 +242,7 @@ if __name__ == "__main__":
         print(tabla_grafos)
         tabla_grafos.write_csv('tabla_grafos.csv')
         print("Tabla guardada en 'tabla_grafos.csv'.")
-\`\`\`
+```
 
 * Este bloque se ejecuta cuando se corre el script.
 * Define las rutas de los archivos de entrada.
